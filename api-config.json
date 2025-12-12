@@ -1,0 +1,24 @@
+{
+  "contracts": [
+    {
+      "name": "AppleContract",
+      "class": "contracts/apples/AppleContract"
+    },
+    {
+      "name": "EggContract",
+      "class": "contracts/eggs/EggContract"
+    },
+    {
+      "name": "IncubatorContract",
+      "class": "contracts/incubator/IncubatorContract"
+    },
+    {
+      "name": "SoulContract",
+      "class": "contracts/soul/SoulContract"
+    },
+    {
+      "name": "CreatureContract",
+      "class": "contracts/creatures/CreatureContract"
+    }
+  ]
+}

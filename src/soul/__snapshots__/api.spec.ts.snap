@@ -1,0 +1,1798 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SoulContract API should match snapshot 1`] = `
+{
+  "chaincodeId": "chaincode-id",
+  "channelId": "channel-id",
+  "contractName": "SoulContract",
+  "contractVersion": "?.?.?",
+  "methods": [
+    {
+      "description": "Evaluate a batch of transactions Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "noPartialSuccess": {
+            "description": "If true, the batch will fail if any of the operations fail. If false, the batch will continue even if some of the operations fail. Default: false.",
+          },
+          "operations": {
+            "items": {
+              "properties": {
+                "dto": {
+                  "minLength": 1,
+                  "properties": {
+                    "dtoExpiresAt": {
+                      "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+                      "type": "number",
+                    },
+                    "dtoOperation": {
+                      "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                    "multisig": {
+                      "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+                      "items": {},
+                      "minItems": 2,
+                      "type": "array",
+                    },
+                    "prefix": {
+                      "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                    "signature": {
+                      "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                    "signerAddress": {
+                      "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                    "signerPublicKey": {
+                      "description": "Public key of the user who signed the DTO.",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                    "signing": {
+                      "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+                      "enum": [
+                        "ETH",
+                        "TON",
+                      ],
+                      "type": "string",
+                    },
+                    "uniqueKey": {
+                      "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "dtoExpiresAt": {
+                  "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+                  "type": "number",
+                },
+                "dtoOperation": {
+                  "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "method": {
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "multisig": {
+                  "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+                  "items": {},
+                  "minItems": 2,
+                  "type": "array",
+                },
+                "prefix": {
+                  "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "signature": {
+                  "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "signerAddress": {
+                  "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "signerPublicKey": {
+                  "description": "Public key of the user who signed the DTO.",
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "signing": {
+                  "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+                  "enum": [
+                    "ETH",
+                    "TON",
+                  ],
+                  "type": "string",
+                },
+                "uniqueKey": {
+                  "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+                  "minLength": 1,
+                  "type": "string",
+                },
+              },
+              "required": [
+                "method",
+                "dto",
+              ],
+              "type": "object",
+            },
+            "maxItems": 1000,
+            "minItems": 1,
+            "type": "array",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "writesLimit": {
+            "description": "Soft limit of keys written to chain in a batch, excluding deletes. If the limit is exceeded, all subsequent operations in batch fail. Typically it is safe to repeat failed operations in the next batch. Default: 10000. Max: 100000.",
+            "maximum": 100000,
+            "minimum": 1,
+            "type": "number",
+          },
+        },
+        "required": [
+          "operations",
+        ],
+        "type": "object",
+      },
+      "isWrite": false,
+      "methodName": "BatchEvaluate",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "object",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": "Submit a batch of transactions Transaction updates the chain (submit). Allowed roles: SUBMIT. Allowed orgs: CuratorOrg.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "noPartialSuccess": {
+            "description": "If true, the batch will fail if any of the operations fail. If false, the batch will continue even if some of the operations fail. Default: false.",
+          },
+          "operations": {
+            "items": {
+              "properties": {
+                "dto": {
+                  "minLength": 1,
+                  "properties": {
+                    "dtoExpiresAt": {
+                      "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+                      "type": "number",
+                    },
+                    "dtoOperation": {
+                      "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                    "multisig": {
+                      "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+                      "items": {},
+                      "minItems": 2,
+                      "type": "array",
+                    },
+                    "prefix": {
+                      "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                    "signature": {
+                      "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                    "signerAddress": {
+                      "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                    "signerPublicKey": {
+                      "description": "Public key of the user who signed the DTO.",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                    "signing": {
+                      "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+                      "enum": [
+                        "ETH",
+                        "TON",
+                      ],
+                      "type": "string",
+                    },
+                    "uniqueKey": {
+                      "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+                      "minLength": 1,
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "dtoExpiresAt": {
+                  "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+                  "type": "number",
+                },
+                "dtoOperation": {
+                  "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "method": {
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "multisig": {
+                  "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+                  "items": {},
+                  "minItems": 2,
+                  "type": "array",
+                },
+                "prefix": {
+                  "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "signature": {
+                  "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "signerAddress": {
+                  "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "signerPublicKey": {
+                  "description": "Public key of the user who signed the DTO.",
+                  "minLength": 1,
+                  "type": "string",
+                },
+                "signing": {
+                  "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+                  "enum": [
+                    "ETH",
+                    "TON",
+                  ],
+                  "type": "string",
+                },
+                "uniqueKey": {
+                  "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+                  "minLength": 1,
+                  "type": "string",
+                },
+              },
+              "required": [
+                "method",
+                "dto",
+              ],
+              "type": "object",
+            },
+            "maxItems": 1000,
+            "minItems": 1,
+            "type": "array",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "writesLimit": {
+            "description": "Soft limit of keys written to chain in a batch, excluding deletes. If the limit is exceeded, all subsequent operations in batch fail. Typically it is safe to repeat failed operations in the next batch. Default: 10000. Max: 100000.",
+            "maximum": 100000,
+            "minimum": 1,
+            "type": "number",
+          },
+        },
+        "required": [
+          "operations",
+        ],
+        "type": "object",
+      },
+      "isWrite": true,
+      "methodName": "BatchSubmit",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "object",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction updates the chain (submit). Allowed roles: SUBMIT.",
+      "dtoSchema": {
+        "properties": {
+          "buyerAddress": {
+            "type": "string",
+          },
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "galaAmount": {
+            "minimum": 0.000001,
+            "type": "number",
+          },
+          "galaTokenInstance": {
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "required": [
+          "buyerAddress",
+          "galaAmount",
+          "galaTokenInstance",
+        ],
+        "type": "object",
+      },
+      "isWrite": true,
+      "methodName": "BuySoulWithGala",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "null",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "dtoSchema": {
+        "properties": {
+          "callerPublicKey": {
+            "minLength": 1,
+            "type": "string",
+          },
+          "dto": {
+            "minLength": 1,
+            "type": "string",
+          },
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "method": {
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "required": [
+          "method",
+        ],
+        "type": "object",
+      },
+      "isWrite": false,
+      "methodName": "DryRun",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "properties": {
+              "dtoExpiresAt": {
+                "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+                "type": "number",
+              },
+              "dtoOperation": {
+                "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+                "minLength": 1,
+                "type": "string",
+              },
+              "multisig": {
+                "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+                "items": {},
+                "minItems": 2,
+                "type": "array",
+              },
+              "prefix": {
+                "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+                "minLength": 1,
+                "type": "string",
+              },
+              "signature": {
+                "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+                "minLength": 1,
+                "type": "string",
+              },
+              "signerAddress": {
+                "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+                "minLength": 1,
+                "type": "string",
+              },
+              "signerPublicKey": {
+                "description": "Public key of the user who signed the DTO.",
+                "minLength": 1,
+                "type": "string",
+              },
+              "signing": {
+                "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+                "enum": [
+                  "ETH",
+                  "TON",
+                ],
+                "type": "string",
+              },
+              "uniqueKey": {
+                "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+                "minLength": 1,
+                "type": "string",
+              },
+            },
+            "type": "object",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "isWrite": false,
+      "methodName": "GetAdminWallet",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "null",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "deprecated": true,
+      "description": "Gets the contract version. Deprecated. Use GetContractVersion instead. Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "isWrite": false,
+      "methodName": "GetChaincodeVersion",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "string",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "isWrite": false,
+      "methodName": "GetContractAPI",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "object",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "isWrite": false,
+      "methodName": "GetContractVersion",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "string",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "isWrite": false,
+      "methodName": "GetCurrentRate",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "null",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "objectId": {
+            "minLength": 1,
+            "type": "string",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "required": [
+          "objectId",
+        ],
+        "type": "object",
+      },
+      "isWrite": false,
+      "methodName": "GetObjectByKey",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "object",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "objectId": {
+            "minLength": 1,
+            "type": "string",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "required": [
+          "objectId",
+        ],
+        "type": "object",
+      },
+      "isWrite": false,
+      "methodName": "GetObjectHistory",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "object",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "galaAmount": {
+            "minimum": 0.000001,
+            "type": "number",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "required": [
+          "galaAmount",
+        ],
+        "type": "object",
+      },
+      "isWrite": false,
+      "methodName": "GetSoulAmount",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "null",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction updates the chain (submit). Allowed roles: SUBMIT.",
+      "dtoSchema": {
+        "properties": {
+          "amount": {
+            "minimum": 0.000001,
+            "type": "number",
+          },
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "to": {
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "required": [
+          "to",
+          "amount",
+        ],
+        "type": "object",
+      },
+      "isWrite": true,
+      "methodName": "MintSoul",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "null",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction updates the chain (submit). Allowed roles: SUBMIT.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "paused": {
+            "type": "boolean",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "required": [
+          "paused",
+        ],
+        "type": "object",
+      },
+      "isWrite": true,
+      "methodName": "PausePurchases",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "null",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction updates the chain (submit). Allowed roles: SUBMIT.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "newWallet": {
+            "type": "string",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "required": [
+          "newWallet",
+        ],
+        "type": "object",
+      },
+      "isWrite": true,
+      "methodName": "SetAdminWallet",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "null",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction updates the chain (submit). Allowed roles: SUBMIT.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "newRate": {
+            "minimum": 1,
+            "type": "number",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "required": [
+          "newRate",
+        ],
+        "type": "object",
+      },
+      "isWrite": true,
+      "methodName": "SetExchangeRate",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "null",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction updates the chain (submit). Allowed roles: SUBMIT.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "soulTokenClassKey": {
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "required": [
+          "soulTokenClassKey",
+        ],
+        "type": "object",
+      },
+      "isWrite": true,
+      "methodName": "SetSoulTokenClass",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "null",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "isWrite": false,
+      "methodName": "TotalGalaBurned",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "null",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+    {
+      "description": " Transaction is read only (evaluate). Allowed roles: EVALUATE.",
+      "dtoSchema": {
+        "properties": {
+          "dtoExpiresAt": {
+            "description": "Unit timestamp when the DTO expires. If the timestamp is in the past, the DTO is not valid.",
+            "type": "number",
+          },
+          "dtoOperation": {
+            "description": "Full operation identifier that is called on chain with this DTO. The format is \`channelId_chaincodeId_methodName\`. It is required for multisig DTOs, and optional for single signed DTOs. ",
+            "minLength": 1,
+            "type": "string",
+          },
+          "multisig": {
+            "description": "List of signatures for this DTO if there are multiple signers. If there are multiple signatures, 'signerAddress' is required, and it is not allowed to provide 'signature' or 'signerPublicKey' or 'prefix' fields, and the signing scheme must be ETH.",
+            "items": {},
+            "minItems": 2,
+            "type": "array",
+          },
+          "prefix": {
+            "description": "Prefix for Metamask transaction signatures. Necessary to format payloads correctly to recover publicKey from web3 signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signature": {
+            "description": "Signature of the DTO signed with caller's private key to be verified with user's public key saved on chain. The 'signature' field is optional for DTO, but is required for a transaction to be executed on chain. 
+Please consult [GalaChain SDK documentation](https://github.com/GalaChain/sdk/blob/main/docs/authorization.md#signature-based-authorization) on how to create signatures.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerAddress": {
+            "description": "Address of the user who signed the DTO. Typically Ethereum or TON address, or user alias.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signerPublicKey": {
+            "description": "Public key of the user who signed the DTO.",
+            "minLength": 1,
+            "type": "string",
+          },
+          "signing": {
+            "description": "Signing scheme used for the signature. "ETH" for Ethereum, and "TON" for The Open Network are supported. Default: "ETH".",
+            "enum": [
+              "ETH",
+              "TON",
+            ],
+            "type": "string",
+          },
+          "uniqueKey": {
+            "description": "Unique key of the DTO. It is used to prevent double execution of the same transaction on chain. The key is saved on chain and checked before execution. If a DTO with already saved key is used in transaction, the transaction will fail with UniqueTransactionConflict error, which is mapped to HTTP 409 Conflict error. In case of the error, no changes are saved to chain state.
+The key is generated by the caller and should be unique for each DTO. You can use \`nanoid\` library, UUID scheme, or any tool to generate unique string keys.",
+            "minLength": 1,
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "isWrite": false,
+      "methodName": "TotalGalaCollected",
+      "responseSchema": {
+        "properties": {
+          "Data": {
+            "type": "null",
+          },
+          "Message": {
+            "type": "string",
+          },
+          "Status": {
+            "description": "Indicates Error (0) or Success (1)",
+            "enum": [
+              0,
+              1,
+            ],
+          },
+        },
+        "required": [
+          "Status",
+        ],
+        "type": "object",
+      },
+    },
+  ],
+}
+`;
