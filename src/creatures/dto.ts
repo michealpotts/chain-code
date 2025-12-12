@@ -106,7 +106,7 @@ export class UpdateCreatureSettingsDto extends SubmitCallDTO {
 
   @IsOptional()
   @IsString()
-  burnAddress?: string;
+  poolAddress?: string;
 
   @IsOptional()
   @IsBoolean()

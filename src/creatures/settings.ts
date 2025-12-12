@@ -17,7 +17,7 @@ export class CreatureSettings extends ChainObject {
   public adminWallet: string;
 
   @IsString()
-  public burnAddress: string;
+  public poolAddress: string;
 
   @IsBoolean()
   public paused: boolean;
@@ -48,7 +48,7 @@ export class CreatureSettings extends ChainObject {
     id: string;
     adminAddress: string;
     adminWallet: string;
-    burnAddress: string;
+    poolAddress: string;
     paused?: boolean;
     authorizedContracts?: string[];
     babyGalaCost?: number;
@@ -62,7 +62,7 @@ export class CreatureSettings extends ChainObject {
     this.id = params.id;
     this.adminAddress = params.adminAddress;
     this.adminWallet = params.adminWallet;
-    this.burnAddress = params.burnAddress;
+    this.poolAddress = params.poolAddress;
     this.paused = params.paused ?? false;
     this.authorizedContracts = params.authorizedContracts ?? [];
     this.babyGalaCost = params.babyGalaCost ?? BABY_GALA_COST;

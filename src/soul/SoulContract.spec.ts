@@ -31,7 +31,7 @@ describe("SoulContract", () => {
       id: "settings",
       adminAddress: user.identityKey,
       adminWallet: user.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       exchangeRate: 100, // 1 SOUL = 100 GALA
       soulTokenClassKey: `${soulTokenClassKey.category}:${soulTokenClassKey.collection}:${soulTokenClassKey.type}`,
     });
@@ -54,7 +54,7 @@ describe("SoulContract", () => {
       id: "settings",
       adminAddress: admin.identityKey,
       adminWallet: admin.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       exchangeRate: 100,
     });
 
@@ -77,7 +77,7 @@ describe("SoulContract", () => {
       id: "settings",
       adminAddress: admin.identityKey,
       adminWallet: admin.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       exchangeRate: 100,
     });
 
@@ -162,7 +162,7 @@ describe("SoulContract", () => {
       id: "settings",
       adminAddress: admin.identityKey,
       adminWallet: admin.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       exchangeRate: 100,
     });
 
@@ -189,7 +189,7 @@ describe("SoulContract", () => {
       id: "settings",
       adminAddress: user.identityKey,
       adminWallet: user.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       exchangeRate: 100,
       purchasesPaused: true,
       soulTokenClassKey: `${soulTokenClassKey.category}:${soulTokenClassKey.collection}:${soulTokenClassKey.type}`,
@@ -223,7 +223,7 @@ describe("SoulContract", () => {
       id: "settings",
       adminAddress: user.identityKey,
       adminWallet: user.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       exchangeRate: 50,
       soulTokenClassKey: `${soulTokenClassKey.category}:${soulTokenClassKey.collection}:${soulTokenClassKey.type}`,
     });
@@ -256,7 +256,7 @@ describe("SoulContract", () => {
       id: "settings",
       adminAddress: admin.identityKey,
       adminWallet: admin.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       exchangeRate: 100,
       soulTokenClassKey: `${soulTokenClassKey.category}:${soulTokenClassKey.collection}:${soulTokenClassKey.type}`,
     });
@@ -278,7 +278,7 @@ describe("SoulContract", () => {
       id: "settings",
       adminAddress: admin.identityKey,
       adminWallet: admin.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       exchangeRate: 100,
       purchasesPaused: false,
     });
@@ -306,7 +306,7 @@ describe("SoulContract", () => {
       id: "settings",
       adminAddress: user.identityKey,
       adminWallet: user.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       exchangeRate: 100,
       // soulTokenClassKey not set
     });

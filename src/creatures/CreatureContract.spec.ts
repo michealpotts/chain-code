@@ -104,7 +104,7 @@ describe("CreatureContract", () => {
     expect((raw as any).Message).toMatch(/egg not found/i);
   });
 
-  it("evolves two matching creatures to next generation and burns parents", async () => {
+  it("evolves two matching creatures to next generation and removes parents", async () => {
     const user = users.random();
     const parentA = makeCreature({
       id: "creature-a",

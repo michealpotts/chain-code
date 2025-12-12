@@ -63,5 +63,5 @@ export const EVOLVE_GALA_COST = 500;
 export const EVOLVE_SOUL_COST = 1;
 export const MINT_EGG_GALA_COST = 500;
 export const MINT_EGG_SOUL_COST = 1;
-export const BURN_PERCENTAGE = 0.15;
+export const POOL_PERCENTAGE = 0.15;
 

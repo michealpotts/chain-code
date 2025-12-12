@@ -1,17 +1,4 @@
-/*
- * Copyright (c) Gala Games Inc. All rights reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 import {
   ConflictError,
   DefaultError,
@@ -156,7 +143,7 @@ export class IncubatorContract extends GalaContract {
   /**
    * Speed up incubation by reducing remaining time
    * Tiers: 1h/100 GALA, 4h/300 GALA, 8h/500 GALA
-   * Fee distribution: 15% burn, 85% admin
+   * Fee distribution: 15% pool, 85% admin
    */
   @Submit({
     in: SpeedUpIncubationDto,
@@ -193,7 +180,7 @@ export class IncubatorContract extends GalaContract {
     const userId = await resolveUserAlias(ctx, session.userId);
 
     // Transfer GALA from user
-    // Transfer 15% to burn address
+    // Transfer 15% to pool address
     const poolAmountBN = pool;
     if (poolAmountBN.gt(0)) {
       await transferToken(ctx, {
@@ -258,7 +245,7 @@ export class IncubatorContract extends GalaContract {
   /**
    * Claim hatched creature
    * Validates: incubation is complete
-   * Mints creature NFT, burns egg
+   * Mints creature NFT, removes egg from chain
    */
   @Submit({
     in: ClaimCreatureDto,
@@ -312,7 +299,7 @@ export class IncubatorContract extends GalaContract {
     // Get the minted token instance (first one from the result)
     const creatureTokenInstance = mintResult[0];
 
-    // Burn egg (delete from chain)
+    // Remove egg from chain (delete from chain)
     await ctx.stub.deleteState(egg.getCompositeKey());
 
     // Delete session and user index

@@ -7,7 +7,7 @@ A GalaChain contract for purchasing SOUL tokens with GALA tokens, featuring adju
 - **Token Purchase**: Buy SOUL tokens using GALA tokens
 - **Dynamic Exchange Rate**: Admin can adjust the GALA:SOUL exchange rate
 - **Automatic Fee Distribution**: 
-  - 15% of GALA → Burned (sent to burn address)
+  - 15% of GALA → Pooled (sent to pool address)
   - 85% of GALA → Admin wallet
 - **Admin Controls**: Set exchange rate, admin wallet, pause/resume purchases
 - **Direct Minting**: Admin can mint SOUL tokens directly for rewards/airdrops
@@ -73,7 +73,7 @@ BuySoulWithGala({
 // Returns:
 // {
 //   soulAmount: 10, // 1000 GALA / 100 rate = 10 SOUL
-//   galaBurned: 150, // 15% of 1000
+//   galaPooled: 150, // 15% of 1000
 //   galaToAdmin: 850 // 85% of 1000
 // }
 ```
@@ -127,21 +127,21 @@ PausePurchases({
 
 - `GetCurrentRate()` - Returns current exchange rate (GALA per SOUL)
 - `GetAdminWallet()` - Returns admin wallet address
-- `TotalGalaBurned()` - Returns total GALA burned (15% of all purchases)
+- `TotalGalaPooled()` - Returns total GALA pooled (15% of all purchases)
 - `TotalGalaCollected()` - Returns total GALA collected by admin (85% of all purchases)
 
 ## Exchange Rate Formula
 
 ```
 SOUL_Amount = GALA_Paid / Current_Exchange_Rate
-GALA_Burned = GALA_Paid × 15%
+GALA_Pooled = GALA_Paid × 15%
 GALA_To_Admin = GALA_Paid × 85%
 ```
 
 ## Default Settings
 
 - **Initial Exchange Rate**: 100 (1 SOUL = 100 GALA)
-- **Burn Percentage**: 15%
+- **Pool Percentage**: 15%
 - **Admin Percentage**: 85%
 - **Decimals**: 18
 

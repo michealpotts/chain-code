@@ -414,10 +414,10 @@ export class EggContract extends GalaContract {
       id: `${ctx.stub.getTxID()}:${refId}:${action}`,
       payer,
       galaAmount: new BigNumber(galaAmount),
-      burned: pool,
+      pooled: pool,
       sentToAdmin: toAdmin,
       adminAddress: settings.adminAddress,
-      burnAddress: settings.poolAddress,
+      poolAddress: settings.poolAddress,
       createdAt: ctx.txUnixTime
     });
 

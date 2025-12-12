@@ -8,7 +8,7 @@ A GalaChain contract for incubating eggs and hatching creatures, with speed-up m
 - **Egg Validation**: Validates ownership, incubation status, and availability
 - **Rarity-Based Timing**: Incubation duration varies by egg rarity
 - **Speed-Up Mechanics**: Users can speed up incubation with GALA (3 tiers)
-- **Automatic Fee Distribution**: 15% of GALA burned, 85% to admin
+- **Automatic Fee Distribution**: 15% of GALA pooled, 85% to admin
 - **Creature Minting**: Automatically mints creature NFT when incubation completes
 
 ## Incubation Times by Rarity
@@ -129,7 +129,7 @@ ClaimCreature({
 
 **Actions:**
 - Mints creature NFT to user
-- Burns the egg
+- Removes the egg from chain
 - Deletes the incubation session
 
 ### View Functions
@@ -178,12 +178,12 @@ PauseIncubator({
 2. **Timer starts** → Based on egg rarity
 3. **User can speed up** → Multiple times with different tiers
 4. **Timer completes** → User can claim creature
-5. **Creature minted** → Egg burned, session deleted
+5. **Creature minted** → Egg removed from chain, session deleted
 
 ## Fee Distribution
 
 When users speed up incubation:
-- **15% of GALA** → Burned (sent to burn address)
+- **15% of GALA** → Pooled (sent to pool address)
 - **85% of GALA** → Admin wallet
 
 ## Events

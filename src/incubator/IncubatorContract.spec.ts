@@ -1,17 +1,4 @@
-/*
- * Copyright (c) Gala Games Inc. All rights reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 import { randomUniqueKey, TokenClassKey } from "@gala-chain/api";
 import { fixture, transactionErrorMessageContains, users } from "@gala-chain/test";
 import { plainToInstance } from "class-transformer";
@@ -48,7 +35,7 @@ describe("IncubatorContract", () => {
       id: "settings",
       adminAddress: user.identityKey,
       adminWallet: user.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       contractAddress: contractUser.identityKey,
       creatureTokenClassKey: `${creatureTokenClassKey.category}:${creatureTokenClassKey.collection}:${creatureTokenClassKey.type}`,
     });
@@ -117,7 +104,7 @@ describe("IncubatorContract", () => {
       id: "settings",
       adminAddress: owner.identityKey,
       adminWallet: owner.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       contractAddress: contractUser.identityKey,
       creatureTokenClassKey: `${creatureTokenClassKey.category}:${creatureTokenClassKey.collection}:${creatureTokenClassKey.type}`,
     });
@@ -170,7 +157,7 @@ describe("IncubatorContract", () => {
       id: "settings",
       adminAddress: user.identityKey,
       adminWallet: user.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       contractAddress: contractUser.identityKey,
       creatureTokenClassKey: `${creatureTokenClassKey.category}:${creatureTokenClassKey.collection}:${creatureTokenClassKey.type}`,
     });
@@ -222,7 +209,7 @@ describe("IncubatorContract", () => {
       id: "settings",
       adminAddress: admin.identityKey,
       adminWallet: admin.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       contractAddress: admin.identityKey,
     });
 
@@ -253,7 +240,7 @@ describe("IncubatorContract", () => {
       id: "settings",
       adminAddress: user.identityKey,
       adminWallet: user.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       contractAddress: contractUser.identityKey,
       creatureTokenClassKey: `${creatureTokenClassKey.category}:${creatureTokenClassKey.collection}:${creatureTokenClassKey.type}`,
     });
@@ -316,7 +303,7 @@ describe("IncubatorContract", () => {
       id: "settings",
       adminAddress: user.identityKey,
       adminWallet: user.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       contractAddress: contractUser.identityKey,
       creatureTokenClassKey: `${creatureTokenClassKey.category}:${creatureTokenClassKey.collection}:${creatureTokenClassKey.type}`,
     });
@@ -369,7 +356,7 @@ describe("IncubatorContract", () => {
       id: "settings",
       adminAddress: admin.identityKey,
       adminWallet: admin.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       contractAddress: admin.identityKey,
     });
 
@@ -405,7 +392,7 @@ describe("IncubatorContract", () => {
       id: "settings",
       adminAddress: user.identityKey,
       adminWallet: user.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       contractAddress: contractUser.identityKey,
       creatureTokenClassKey: `${creatureTokenClassKey.category}:${creatureTokenClassKey.collection}:${creatureTokenClassKey.type}`,
       paused: true,
@@ -459,7 +446,7 @@ describe("IncubatorContract", () => {
       id: "settings",
       adminAddress: user.identityKey,
       adminWallet: user.identityKey,
-      burnAddress: "burn",
+      poolAddress: "pool",
       contractAddress: contractUser.identityKey,
       creatureTokenClassKey: `${creatureTokenClassKey.category}:${creatureTokenClassKey.collection}:${creatureTokenClassKey.type}`,
     });

@@ -48,7 +48,7 @@ export class SoulContract extends GalaContract {
   /**
    * User purchases SOUL tokens with GALA tokens
    * Formula: SOUL_Amount = GALA_Paid / Current_Exchange_Rate
-   * Fee Distribution: 15% burn, 85% admin
+   * Fee Distribution: 15% pool, 85% admin
    */
   @Submit({
     in: BuySoulWithGalaDto,
@@ -80,10 +80,10 @@ export class SoulContract extends GalaContract {
 
     // Transfer GALA from buyer to contract (temporary - we'll redistribute)
     // Note: In GalaChain, we need to transfer to addresses, so we'll transfer directly
-    // to burn address and admin wallet instead of through contract
+    // to pool address and admin wallet instead of through contract
     const buyerAddress = await resolveUserAlias(ctx, dto.buyerAddress);
 
-    // Transfer 15% to burn address
+    // Transfer 15% to pool address
     const poolAmountBN = pool;
     if (poolAmountBN.gt(0)) {
       await transferToken(ctx, {
@@ -346,13 +346,13 @@ export class SoulContract extends GalaContract {
   }
 
   /**
-   * View: Get total GALA burned
+   * View: Get total GALA pooled
    */
   @GalaTransaction({
     type: GalaTransactionType.EVALUATE,
     in: GetCurrentRateDto, // Reusing DTO for simplicity
   })
-  public async TotalGalaBurned(ctx: GalaChainContext, dto: GetCurrentRateDto): Promise<GalaChainResponse<number>> {
+  public async TotalGalaPooled(ctx: GalaChainContext, dto: GetCurrentRateDto): Promise<GalaChainResponse<number>> {
     const settings = await this.loadSettings(ctx);
     return GalaChainResponse.Success(settings.totalGalaPooled ?? 0);
   }

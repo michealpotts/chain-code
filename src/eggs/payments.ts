@@ -16,7 +16,7 @@ export class PaymentRecord extends ChainObject {
   public readonly galaAmount: BigNumber;
 
   @BigNumberProperty()
-  public readonly burned: BigNumber;
+  public readonly pooled: BigNumber;
 
   @BigNumberProperty()
   public readonly sentToAdmin: BigNumber;
@@ -25,7 +25,7 @@ export class PaymentRecord extends ChainObject {
   public readonly adminAddress: string;
 
   @IsString()
-  public readonly burnAddress: string;
+  public readonly poolAddress: string;
 
   @IsNumber()
   public readonly createdAt: number;
@@ -34,20 +34,20 @@ export class PaymentRecord extends ChainObject {
     id: string;
     payer: string;
     galaAmount: BigNumber;
-    burned: BigNumber;
+    pooled: BigNumber;
     sentToAdmin: BigNumber;
     adminAddress: string;
-    burnAddress: string;
+    poolAddress: string;
     createdAt: number;
   }) {
     super();
     this.id = params.id;
     this.payer = params.payer;
     this.galaAmount = params.galaAmount;
-    this.burned = params.burned;
+    this.pooled = params.pooled;
     this.sentToAdmin = params.sentToAdmin;
     this.adminAddress = params.adminAddress;
-    this.burnAddress = params.burnAddress;
+    this.poolAddress = params.poolAddress;
     this.createdAt = params.createdAt;
   }
 }

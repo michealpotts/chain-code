@@ -1,17 +1,4 @@
-/*
- * Copyright (c) Gala Games Inc. All rights reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 import {
   ChainClient,
   ChainUser,
@@ -256,18 +243,18 @@ describe("Soul contract e2e", () => {
     expect(response.Status).toBe(1);
     expect(response.Data).toBeDefined();
     expect(response.Data).toHaveProperty("soulAmount");
-    expect(response.Data).toHaveProperty("galaBurned");
+    expect(response.Data).toHaveProperty("galaPooled");
     expect(response.Data).toHaveProperty("galaToAdmin");
     // With default rate of 100, 1000 GALA = 10 SOUL
     expect(response.Data.soulAmount).toBe(10);
-    expect(response.Data.galaBurned).toBe(150); // 15% of 1000
+    expect(response.Data.galaPooled).toBe(150); // 15% of 1000
     expect(response.Data.galaToAdmin).toBe(850); // 85% of 1000
   });
 
-  test("gets total GALA burned and collected", async () => {
-    const burnedDto = new GetCurrentRateDto();
-    const burnedResponse = await client.soul.TotalGalaBurned(burnedDto.signed(user.privateKey));
-    expect(burnedResponse).toEqual(transactionSuccess(expect.any(Number)));
+  test("gets total GALA pooled and collected", async () => {
+    const pooledDto = new GetCurrentRateDto();
+    const pooledResponse = await client.soul.TotalGalaPooled(pooledDto.signed(user.privateKey));
+    expect(pooledResponse).toEqual(transactionSuccess(expect.any(Number)));
 
     const collectedDto = new GetCurrentRateDto();
     const collectedResponse = await client.soul.TotalGalaCollected(collectedDto.signed(user.privateKey));
@@ -276,7 +263,7 @@ describe("Soul contract e2e", () => {
 });
 
 interface SoulContractAPI {
-  BuySoulWithGala(dto: BuySoulWithGalaDto): Promise<GalaChainResponse<{ soulAmount: number; galaBurned: number; galaToAdmin: number }>>;
+  BuySoulWithGala(dto: BuySoulWithGalaDto): Promise<GalaChainResponse<{ soulAmount: number; galaPooled: number; galaToAdmin: number }>>;
   GetSoulAmount(dto: GetSoulAmountDto): Promise<GalaChainResponse<number>>;
   SetExchangeRate(dto: SetExchangeRateDto): Promise<GalaChainResponse<number>>;
   SetAdminWallet(dto: SetAdminWalletDto): Promise<GalaChainResponse<string>>;
@@ -284,7 +271,7 @@ interface SoulContractAPI {
   MintSoul(dto: MintSoulDto): Promise<GalaChainResponse<number>>;
   GetCurrentRate(dto: GetCurrentRateDto): Promise<GalaChainResponse<number>>;
   GetAdminWallet(dto: GetAdminWalletDto): Promise<GalaChainResponse<string>>;
-  TotalGalaBurned(dto: GetCurrentRateDto): Promise<GalaChainResponse<number>>;
+  TotalGalaPooled(dto: GetCurrentRateDto): Promise<GalaChainResponse<number>>;
   TotalGalaCollected(dto: GetCurrentRateDto): Promise<GalaChainResponse<number>>;
 }
 
@@ -294,7 +281,7 @@ function soulContractAPI(client: ChainClient): SoulContractAPI & CommonContractA
 
     BuySoulWithGala(dto: BuySoulWithGalaDto) {
       return client.submitTransaction("BuySoulWithGala", dto) as Promise<
-        GalaChainResponse<{ soulAmount: number; galaBurned: number; galaToAdmin: number }>
+        GalaChainResponse<{ soulAmount: number; galaPooled: number; galaToAdmin: number }>
       >;
     },
 
@@ -326,8 +313,8 @@ function soulContractAPI(client: ChainClient): SoulContractAPI & CommonContractA
       return client.evaluateTransaction("GetAdminWallet", dto) as Promise<GalaChainResponse<string>>;
     },
 
-    TotalGalaBurned(dto: GetCurrentRateDto) {
-      return client.evaluateTransaction("TotalGalaBurned", dto) as Promise<GalaChainResponse<number>>;
+    TotalGalaPooled(dto: GetCurrentRateDto) {
+      return client.evaluateTransaction("TotalGalaPooled", dto) as Promise<GalaChainResponse<number>>;
     },
 
     TotalGalaCollected(dto: GetCurrentRateDto) {

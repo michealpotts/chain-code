@@ -29,7 +29,7 @@ import { CreatureSettings } from "./settings";
 import {
   BABY_GALA_COST,
   BABY_SOUL_COST,
-  BURN_PERCENTAGE,
+  POOL_PERCENTAGE,
   CREATURE_RARITY_ORDER,
   CreatureMetadata,
   Generation
@@ -317,7 +317,7 @@ export class CreatureContract extends GalaContract {
 
     settings.adminAddress = dto.adminAddress ?? settings.adminAddress;
     settings.adminWallet = dto.adminWallet ?? settings.adminWallet;
-    settings.burnAddress = dto.burnAddress ?? settings.burnAddress;
+    settings.poolAddress = dto.poolAddress ?? settings.poolAddress;
     settings.paused = dto.paused ?? settings.paused;
     settings.authorizedContracts = dto.authorizedContracts ?? settings.authorizedContracts;
     settings.babyGalaCost = dto.babyGalaCost ?? settings.babyGalaCost;
@@ -331,7 +331,7 @@ export class CreatureContract extends GalaContract {
     this.emitEvent(ctx, "CreatureSettingsUpdated", {
       admin: settings.adminAddress,
       adminWallet: settings.adminWallet,
-      burnAddress: settings.burnAddress,
+      poolAddress: settings.poolAddress,
       paused: settings.paused
     });
 
@@ -496,9 +496,9 @@ export class CreatureContract extends GalaContract {
       if (!galaTokenInstance) {
         throw new DefaultError("galaTokenInstance is required to collect GALA");
       }
-      const { burn, toAdmin } = this.splitPayment(galaAmount);
+      const { pool, toAdmin } = this.splitPayment(galaAmount);
       const tokenKey = this.parseTokenInstanceKey(galaTokenInstance);
-      await this.transfer(ctx, payer, settings.burnAddress, tokenKey, burn, refId, action, "GalaBurn");
+      await this.transfer(ctx, payer, settings.poolAddress, tokenKey, pool, refId, action, "GalaPool");
       await this.transfer(ctx, payer, settings.adminWallet, tokenKey, toAdmin, refId, action, "GalaAdmin");
     }
 
@@ -506,9 +506,9 @@ export class CreatureContract extends GalaContract {
       if (!soulTokenInstance) {
         throw new DefaultError("soulTokenInstance is required to collect SOUL");
       }
-      const { burn, toAdmin } = this.splitPayment(soulAmount);
+      const { pool, toAdmin } = this.splitPayment(soulAmount);
       const tokenKey = this.parseTokenInstanceKey(soulTokenInstance);
-      await this.transfer(ctx, payer, settings.burnAddress, tokenKey, burn, refId, action, "SoulBurn");
+      await this.transfer(ctx, payer, settings.poolAddress, tokenKey, pool, refId, action, "SoulPool");
       await this.transfer(ctx, payer, settings.adminWallet, tokenKey, toAdmin, refId, action, "SoulAdmin");
     }
   }
@@ -539,10 +539,10 @@ export class CreatureContract extends GalaContract {
     this.emitEvent(ctx, "PaymentSplit", { kind, from, to, quantity: quantity.toString(), refId, action });
   }
 
-  private splitPayment(amount: number): { burn: BigNumber; toAdmin: BigNumber } {
-    const burn = new BigNumber(amount).multipliedBy(BURN_PERCENTAGE);
-    const toAdmin = new BigNumber(amount).minus(burn);
-    return { burn, toAdmin };
+  private splitPayment(amount: number): { pool: BigNumber; toAdmin: BigNumber } {
+    const pool = new BigNumber(amount).multipliedBy(POOL_PERCENTAGE);
+    const toAdmin = new BigNumber(amount).minus(pool);
+    return { pool, toAdmin };
   }
 
   private assertCosts(galaAmount: number, soulAmount: number, requiredGala: number, requiredSoul: number, action: string) {
@@ -588,7 +588,7 @@ export class CreatureContract extends GalaContract {
       id: "settings",
       adminAddress: ctx.callingUser,
       adminWallet: ctx.callingUser,
-      burnAddress: "burn"
+      poolAddress: "pool"
     });
     await putChainObject(ctx, defaultSettings);
     return defaultSettings;

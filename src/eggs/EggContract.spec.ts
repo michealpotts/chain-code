@@ -49,7 +49,7 @@ it("requires authorization for mint by parents", async () => {
   const settings = new EggSettings({
     id: "settings",
     adminAddress: caller.identityKey,
-    burnAddress: "burn",
+    poolAddress: "pool",
     authorizedContracts: []
   });
 
