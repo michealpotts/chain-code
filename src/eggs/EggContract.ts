@@ -13,7 +13,8 @@ import {
   GalaTransactionType,
   Submit,
   getObjectByKey,
-  putChainObject
+  putChainObject,
+  resolveUserAlias
 } from "@gala-chain/chaincode";
 import BigNumber from "bignumber.js";
 
@@ -22,6 +23,7 @@ import { EggNFT } from "./EggNFT";
 import {
   BurnEggDto,
   FetchEggDto,
+  FetchEggsByOwnerDto,
   HatchDto,
   MintByParentsDto,
   MintByUserDto,
@@ -296,6 +298,33 @@ export class EggContract extends GalaContract {
   })
   public async GetEgg(ctx: GalaChainContext, dto: FetchEggDto): Promise<EggNFT> {
     return this.getEggOrThrow(ctx, dto.id);
+  }
+
+  @GalaTransaction({
+    type: GalaTransactionType.EVALUATE,
+    in: FetchEggsByOwnerDto,
+    out: { arrayOf: EggNFT }
+  })
+  public async GetEggsByOwner(ctx: GalaChainContext, dto: FetchEggsByOwnerDto): Promise<EggNFT[]> {
+    const owner = await resolveUserAlias(ctx, dto.owner);
+    const iterator = ctx.stub.getStateByPartialCompositeKey(EggNFT.INDEX_KEY, []);
+    const eggs: EggNFT[] = [];
+
+    for await (const result of iterator) {
+      if (result.value) {
+        const egg = JSON.parse(result.value.toString()) as EggNFT;
+        if (egg.ownerAddress !== owner) {
+          continue;
+        }
+        if (dto.faction && egg.faction !== dto.faction) continue;
+        if (dto.rarity && egg.rarity !== dto.rarity) continue;
+        if (dto.isHatched !== undefined && egg.isHatched !== dto.isHatched) continue;
+        if (dto.isIncubating !== undefined && egg.isIncubating !== dto.isIncubating) continue;
+        eggs.push(egg as unknown as EggNFT);
+      }
+    }
+
+    return eggs;
   }
 
   @Submit({

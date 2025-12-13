@@ -102,3 +102,24 @@ export class FetchEggDto extends ChainCallDTO {
   @IsString()
   id: string;
 }
+
+export class FetchEggsByOwnerDto extends ChainCallDTO {
+  @IsString()
+  owner: string;
+
+  @IsOptional()
+  @IsEnum(Faction)
+  faction?: Faction;
+
+  @IsOptional()
+  @IsEnum(Rarity)
+  rarity?: Rarity;
+
+  @IsOptional()
+  @IsBoolean()
+  isHatched?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  isIncubating?: boolean;
+}
