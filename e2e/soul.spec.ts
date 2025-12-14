@@ -159,6 +159,32 @@ describe("Soul contract e2e", () => {
     expect(response.Data).toBe(10);
   });
 
+  test("calculates SOUL amount with 8 decimal precision", async () => {
+    // First set a rate that will produce decimals
+    const setRateDto = new SetExchangeRateDto();
+    setRateDto.newRate = 3; // 1 SOUL = 3 GALA
+    setRateDto.uniqueKey = randomUniqueKey();
+    await client.soul.SetExchangeRate(setRateDto.signed(client.assets.privateKey));
+
+    const dto = new GetSoulAmountDto();
+    dto.galaAmount = 10; // 10 GALA / 3 rate = 3.33333333... SOUL
+
+    const response = await client.soul.GetSoulAmount(dto.signed(user.privateKey));
+    expect(response.Status).toBe(1);
+    const soulAmount = response.Data as number;
+
+    // Should be rounded to 8 decimal places: 3.33333333
+    expect(soulAmount).toBe(3.33333333);
+    // Verify it's exactly 8 decimal places (not more, not less)
+    const decimalPlaces = (soulAmount.toString().split('.')[1] || '').length;
+    expect(decimalPlaces).toBeLessThanOrEqual(8);
+
+    // Reset rate to 100 for other tests
+    setRateDto.newRate = 100;
+    setRateDto.uniqueKey = randomUniqueKey();
+    await client.soul.SetExchangeRate(setRateDto.signed(client.assets.privateKey));
+  });
+
   test("admin can set exchange rate", async () => {
     const dto = new SetExchangeRateDto();
     dto.newRate = 200; // 1 SOUL = 200 GALA

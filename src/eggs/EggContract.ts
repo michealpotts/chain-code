@@ -177,7 +177,25 @@ export class EggContract extends GalaContract {
     this.ensureNotPaused(settings);
 
     const egg = await this.getEggOrThrow(ctx, dto.id);
+    
+    // Prevent transfer if egg is incubating
     this.ensureNotIncubating(egg, "transfer");
+    
+    // Prevent transfer if egg has a future hatchReadyAt timestamp (indicates incubation in progress)
+    if (egg.hatchReadyAt && egg.hatchReadyAt > ctx.txUnixTime) {
+      throw new ConflictError("Cannot transfer egg that is incubating", { id: egg.id, hatchReadyAt: egg.hatchReadyAt });
+    }
+    
+    // Prevent transfer if egg is already hatched
+    if (egg.isHatched) {
+      throw new ConflictError("Cannot transfer hatched egg", { id: egg.id });
+    }
+    
+    // Prevent transfer if egg is owned by an authorized contract (likely in escrow)
+    if (settings.authorizedContracts.includes(egg.ownerAddress)) {
+      throw new ConflictError("Cannot transfer egg that is in contract escrow", { id: egg.id, owner: egg.ownerAddress });
+    }
+    
     this.ensureOwnerOrAdmin(ctx, settings, egg.ownerAddress);
 
     if (egg.ownerAddress !== dto.from) {
@@ -209,6 +227,12 @@ export class EggContract extends GalaContract {
 
     const egg = await this.getEggOrThrow(ctx, dto.id);
     this.ensureNotIncubating(egg, "burn");
+    
+    // Prevent burn if egg is owned by an authorized contract (likely in escrow)
+    if (settings.authorizedContracts.includes(egg.ownerAddress)) {
+      throw new ConflictError("Cannot burn egg that is in contract escrow", { id: egg.id, owner: egg.ownerAddress });
+    }
+    
     this.ensureOwnerOrAdmin(ctx, settings, egg.ownerAddress);
 
     await ctx.stub.deleteState(egg.getCompositeKey());
@@ -531,6 +555,9 @@ export class EggContract extends GalaContract {
   private assertGalaAmount(galaAmount: number, expected: number) {
     if (galaAmount < expected) {
       throw new DefaultError("Insufficient GALA sent for mint", { galaAmount, required: expected });
+    }
+    if (galaAmount > expected) {
+      throw new DefaultError("Excess GALA sent. Exact amount required", { galaAmount, required: expected });
     }
   }
 

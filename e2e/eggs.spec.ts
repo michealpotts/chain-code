@@ -117,6 +117,29 @@ describe("Egg contract e2e", () => {
     expect(Array.isArray(eggs)).toBe(true);
     expect(eggs).toHaveLength(4);
   });
+
+  test("rejects overpayment when minting egg", async () => {
+    const dto = new MintByUserDto();
+    dto.ownerAddress = user.identityKey;
+    dto.faction = Faction.FROST;
+    dto.galaAmount = 600; // Overpayment (required is 500)
+    dto.uniqueKey = randomUniqueKey();
+
+    const response = await client.eggs.MintByUser(dto.signed(user.privateKey));
+    expect(response.Status).toBe(0); // Should fail
+    expect(response.Message).toMatch(/excess.*gala|exact amount required/i);
+  });
+
+  test("rejects overpayment when multi minting", async () => {
+    const dto = new MultiMintDto();
+    dto.ownerAddress = user.identityKey;
+    dto.galaAmount = 2500; // Overpayment (required is 2000)
+    dto.uniqueKey = randomUniqueKey();
+
+    const response = await client.eggs.MultiMint(dto.signed(user.privateKey));
+    expect(response.Status).toBe(0); // Should fail
+    expect(response.Message).toMatch(/excess.*gala|exact amount required/i);
+  });
 });
 
 interface EggContractAPI {

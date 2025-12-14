@@ -375,7 +375,13 @@ export class SoulContract extends GalaContract {
   // Private helper methods
 
   private calculateSoulAmount(galaAmount: number, exchangeRate: number): number {
-    return galaAmount / exchangeRate;
+    // Use BigNumber for precise calculations with 8 decimal places
+    const galaBN = new BigNumber(galaAmount);
+    const rateBN = new BigNumber(exchangeRate);
+    const soulBN = galaBN.dividedBy(rateBN);
+    
+    // Round to 8 decimal places
+    return parseFloat(soulBN.toFixed(8));
   }
 
   private splitGalaFees(total: number): { pool: BigNumber; toAdmin: BigNumber } {

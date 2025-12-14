@@ -549,8 +549,14 @@ export class CreatureContract extends GalaContract {
     if (galaAmount < requiredGala) {
       throw new DefaultError("Insufficient GALA provided", { action, required: requiredGala, provided: galaAmount });
     }
+    if (galaAmount > requiredGala) {
+      throw new DefaultError("Excess GALA provided. Exact amount required", { action, required: requiredGala, provided: galaAmount });
+    }
     if (soulAmount < requiredSoul) {
       throw new DefaultError("Insufficient SOUL provided", { action, required: requiredSoul, provided: soulAmount });
+    }
+    if (soulAmount > requiredSoul) {
+      throw new DefaultError("Excess SOUL provided. Exact amount required", { action, required: requiredSoul, provided: soulAmount });
     }
   }
 
