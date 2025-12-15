@@ -1,0 +1,41 @@
+{
+  "channels": [
+    {
+      "pathFragment": "product",
+      "channelName": "product-channel",
+      "asLocalHost": true,
+      "contracts": [
+        {
+          "contractName": "CreatureContract",
+          "chaincodeName": "basic-product",
+          "pathFragment": "CreatureContract"
+        },
+        {
+          "contractName": "EggContract",
+          "chaincodeName": "basic-product",
+          "pathFragment": "EggContract"
+        },
+        {
+          "contractName": "GalaChainToken",
+          "chaincodeName": "basic-product",
+          "pathFragment": "GalaChainToken"
+        },
+        {
+          "contractName": "IncubatorContract",
+          "chaincodeName": "basic-product",
+          "pathFragment": "IncubatorContract"
+        },
+        {
+          "contractName": "PublicKeyContract",
+          "chaincodeName": "basic-product",
+          "pathFragment": "PublicKeyContract"
+        },
+        {
+          "contractName": "SoulContract",
+          "chaincodeName": "basic-product",
+          "pathFragment": "SoulContract"
+        }
+      ]
+    }
+  ]
+}
